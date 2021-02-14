@@ -271,14 +271,12 @@
     do {
     for($i = 0; $i < count($lastArr); $i++) {
         for($j = $i+1; $j < count($lastArr);$j++) {
-            $flag = true; 
-            $count = 0; //
+            $flag = true;
             if($lastArr[$i] == $lastArr[$j]){
                 do{
                     $lastArr[$j] = rand(0, 300);
                         if(in_array($lastArr[$j], $lastArr)){
                             $lastArr[$j] = rand(0, 300);
-                            //break;
                         }
                     if($lastArr[$i] != $lastArr[$j]) {
                         $flag = false;
@@ -289,12 +287,21 @@
     }
     $kolkasTikTaip++;
 }while($kolkasTikTaip < 5);
-
+/*
+    for($i = 0; $i < count($lastArr);$i++) {
+        $temp = $lastArr[$i];
+        $lastArr[$i] = null;
+        while(in_array($temp,$lastArr)) {
+            $temp = rand(0,300);
+        }
+        $lastArr[$i] = $temp;
+    }
+    */
     print_r($lastArr);
     echo '<br><br>';
-    //echo count($lastArr); PATIKRA
+    //echo count($lastArr); //PATIKRA
     echo '<br><br>';
-    //echo count(array_unique($lastArr)); PATIKRA
+    //echo count(array_unique($lastArr)); //PATIKRA
     echo '<br><br>';
     //********************************3.Perrasau atsartiruota array i nauja***********************************/
         $sortedArr = [];
