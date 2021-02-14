@@ -13,7 +13,7 @@
     $newArr = [];
     echo '<h2 style="text-align:center">Task1</h2><br><br>';
     for($i = 0; $i < 30; $i++) {
-        array_push($newArr, rand(2, 25));
+        array_push($newArr, rand(5, 25));
     }
     print_r($newArr);
     //TASK 2
@@ -33,16 +33,17 @@
     for($i = 0; $i < count($newArr); $i++) {
         if($newArr[$i] >= $biggest) {
             $biggest = $newArr[$i];
+            $vieta = $i;
         }
     }
-    echo "Didziausia reiksme masive yra: $biggest<br><br>";
+    echo "Didziausia reiksme masive yra: $biggest kurios pozicija yra: $vieta<br><br>";
     //TASK C
     echo '<br><br> <p style="font-size: 20px; text-align:center;">Part C </p><br><br>';
     $summ = 0;
     for($i = 0; $i < count($newArr); $i++) {
             $summ += $newArr[$i];
     }
-    echo "Masivo elemntu summa: $summ";
+    echo "Masivo elementu suma: $summ";
     //TASK D
     echo '<br><br> <p style="font-size: 20px; text-align:center;">Part D </p><br><br>';
     $newArr2 = [];
@@ -129,7 +130,7 @@
     echo '<br><br><h2 style="text-align:center">Task4</h2><br><br>';
 
     sort($tusciasArr);
-    //print_r($tusciasArr);
+    //print_r($tusciasArr); - PATIKRA
 
     //TASK 5
     echo '<br><br><h2 style="text-align:center">Task5</h2><br><br>';
@@ -137,25 +138,25 @@
     $arrUno =[];
     $arrDos =[];
     $arrTres =[];
-    $dvimatis =[ $arrUno, $arrDos, $arrTres];
-    for($i = 0; $i < count($dvimatis);$i++) {
+    $dvimatis = [$arrUno, $arrDos, $arrTres]; //2D array
+    for($i = 0; $i < count($dvimatis);$i++) { 
         for($j = 0; $j < 200; $j++) {
             $random = rand(0, 3);
-            array_push($dvimatis[$i],$letters[$random]);
+            array_push($dvimatis[$i],$letters[$random]); //$letters pasiemu is 3 uzduoties
         }
     }
-    
+    // susidedu reiksmes i viena array
     for($i = 0; $i < 200; $i++) {
         $dvimatis[0][$i] .= ($dvimatis[1][$i] . $dvimatis[2][$i]);
     }
     print_r($dvimatis[0]);
 
-    $howMuchDuplicates = array_count_values($dvimatis[0]);
-    $unikalusStr ='';
+    $howMuchDuplicates = array_count_values($dvimatis[0]); // grazina masiva, kuriame reiksme yra key - o value yra kiek 
+    $unikalusStr ='';                                      // kiek kartu pakartota.
     $uniq = 0;
     echo '<br><br>';
-    foreach($howMuchDuplicates as $indeksas => $elementas) {
-        if($elementas === 1) {
+    foreach($howMuchDuplicates as $indeksas => $reiksme) {
+        if($reiksme === 1) { // jeigu kartojasi viena karta, reiskia unikali kombinacija
             $uniq++;
             $unikalusStr .= $indeksas.' ';
         }
@@ -190,8 +191,9 @@
     echo '<br><br>';
     print_r($antrasArr);
     //PATIKRA
+    //echo '<br><br>'.count($antrasArr).'<br>';
     //$tikrinu = count(array_unique($antrasArr));
-    //echo $ziuriu;
+    //echo $tikrinu;
 
     //TASK 7
     echo '<br><br><h2 style="text-align:center">Task7</h2><br><br>';
@@ -204,7 +206,7 @@
     print_r($newMasivas);
     //PATIKRA
     //echo '<br><br>';
-    //print_r(array_diff($newMasivas, $antrasArr));
+    //print_r(array_diff($newMasivas, $antrasArr)); //grazina tik reiksmes , kuriu nera sekanciose masivuose
 
     //TASK 8
     echo '<br><br><h2 style="text-align:center">Task8</h2><br><br>';
@@ -259,11 +261,12 @@
 
     //TASK 11
     echo '<br><br><h2 style="text-align:center">Task11</h2><br><br>';
+    //********************************1.Sugeneruoju arr su random reiksmem***********************************/
     $lastArr = [];
     for($i = 0; $i < 101; $i++) {
         array_push($lastArr, rand(0, 300));
     }
-
+    //********************************2.Pakeiciu dublikatus i unikalias reiksmes***********************************/
     $kolkasTikTaip = 0;
     do {
     for($i = 0; $i < count($lastArr); $i++) {
@@ -273,12 +276,10 @@
             if($lastArr[$i] == $lastArr[$j]){
                 do{
                     $lastArr[$j] = rand(0, 300);
-                    //for($k = 0; $k < count($lastArr);$k++) {
                         if(in_array($lastArr[$j], $lastArr)){
                             $lastArr[$j] = rand(0, 300);
                             //break;
                         }
-                    //}
                     if($lastArr[$i] != $lastArr[$j]) {
                         $flag = false;
                     }
@@ -291,11 +292,11 @@
 
     print_r($lastArr);
     echo '<br><br>';
-    echo count($lastArr);
+    //echo count($lastArr); PATIKRA
     echo '<br><br>';
-    echo count(array_unique($lastArr));
+    //echo count(array_unique($lastArr)); PATIKRA
     echo '<br><br>';
-
+    //********************************3.Perrasau atsartiruota array i nauja***********************************/
         $sortedArr = [];
         rsort($lastArr);
         $sortedArr[0] = $lastArr[0];
@@ -308,7 +309,7 @@
             array_push($sortedArr,$lastArr[$i]);
         }
     }
-
+    //********************************4.Suskaicioju vienos ir kitos puses reiksmes(be vid elemento)******************************/
     for($i = 0; $i < count($lastArr); $i++) {
         if($i == 50) {
             continue;
@@ -323,6 +324,7 @@
 
     print_r($sortedArr);
     echo '<br><br>';
+    //********************************5.Tikrinu reiksmes***********************************/
     echo "Sum1: $sum1. Sum2: $sum2";
     $rez = $sum1 - $sum2;
     if($rez < 0) {
